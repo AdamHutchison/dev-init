@@ -1,0 +1,62 @@
+version: '3'
+services:
+  php:
+    build:
+      context: ./docker-local/conf/php
+      dockerfile: Dockerfile
+    restart: always
+    user: ${UID}:${GID}
+    volumes:
+      - ${PROJECT_ROOT}:/var/www
+      - ~/.composer:/var/www/.composer
+    depends_on:
+      - mysql
+      - redis
+    network_mode: bridge
+    links:
+      - mysql
+      - redis
+    environment:
+      PHP_IDE_CONFIG: "serverName=${APP_URL}"
+
+  web:
+    build:
+      context: ./
+      dockerfile: ./docker-local/conf/nginx/Dockerfile
+    volumes:
+      - ${PROJECT_ROOT}:/var/www
+      - ./docker-local/conf/nginx/netsells.test.crt:/etc/nginx/netsells.test.crt
+      - ./docker-local/conf/nginx/netsells.test.key:/etc/nginx/netsells.test.key
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    depends_on:
+      - php
+      - mysql
+      - redis
+    network_mode: bridge
+    links:
+      - php
+
+  mysql:
+    image: library/mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - 3306:3306
+    volumes:
+      - ./docker-local/data/mysql:/var/lib/mysql
+    network_mode: bridge
+
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+    restart: always
+    volumes:
+      - ./docker-local/data/redis:/data
+    network_mode: bridge
