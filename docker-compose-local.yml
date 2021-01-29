@@ -18,6 +18,7 @@ services:
       - redis
     environment:
       PHP_IDE_CONFIG: "serverName=${APP_URL}"
+      XDEBUG_CONFIG: client_host=172.17.0.1
 
   web:
     build:
@@ -43,7 +44,6 @@ services:
     image: library/mysql
     restart: always
     environment:
-      MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_USER: ${DB_USERNAME}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     ports:

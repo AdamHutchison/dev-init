@@ -1,6 +1,7 @@
 FROM php:8.0-fpm
 
 RUN apt-get update && apt-get install -y \
+        zsh \
         vim \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
@@ -61,4 +62,6 @@ RUN chmod 755 /root/install_composer.sh && mkdir /var/www/storage && mkdir /var/
 
 RUN chmod 755 /usr/local/bin/composer && chmod 755 /usr/local/etc/php/composer.phar
 
-RUN mkdir /root/vscode && chmod 755 /root/vscode
+RUN mkdir /home/root && chmod 777 /home/root
+
+ENV HOME /home/root
