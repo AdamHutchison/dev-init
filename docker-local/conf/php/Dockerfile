@@ -1,6 +1,7 @@
 FROM php:8.0-fpm
 
 RUN apt-get update && apt-get install -y \
+        vim \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libmcrypt-dev \
@@ -60,4 +61,4 @@ RUN chmod 755 /root/install_composer.sh && mkdir /var/www/storage && mkdir /var/
 
 RUN chmod 755 /usr/local/bin/composer && chmod 755 /usr/local/etc/php/composer.phar
 
-RUN mkdir /opt/phpstorm-coverage && chmod 755 /opt/phpstorm-coverage
+RUN mkdir /root/vscode && chmod 755 /root/vscode
