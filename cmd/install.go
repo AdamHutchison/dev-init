@@ -22,6 +22,7 @@ import (
 	"io"
 	"io/ioutil"
 	"path"
+	"os/user"
 )
 
 // installCmd represents the install command
@@ -29,7 +30,21 @@ var installCmd = &cobra.Command{
 	Use:   "install",
 	Short: "Installs the base docker configuration into your application",
 	Run: func(cmd *cobra.Command, args []string) {
-		CopyDir("~/.config/dev-init/resources/docker-local", "./")
+		colorRed := "\033[31m"
+		colorGreen := "\033[32m"
+
+		usr, err := user.Current()
+
+		dir := usr.HomeDir + "./config/dev-init/resources/docker-local"
+
+		err2 := CopyDir(dir, "./")
+
+		if err != nil {
+			fmt.Println(string(colorRed), err2)
+		} else {
+			fmt.Println(string(colorGreen), "Docker files have been installed to the docker-local folder")
+		}
+
 	},
 }
 
