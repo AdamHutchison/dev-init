@@ -35,14 +35,14 @@ var installCmd = &cobra.Command{
 
 		usr, err := user.Current()
 
-		dir := usr.HomeDir + "./config/dev-init/resources/docker-local"
+		dir := usr.HomeDir + "/.config/dev-init/resources/"
 
 		err2 := CopyDir(dir, "./")
 
 		if err != nil {
 			fmt.Println(string(colorRed), err2)
 		} else {
-			fmt.Println(string(colorGreen), "Docker files have been installed to the docker-local folder")
+			fmt.Println(string(colorGreen), "Docker files have been installed to the docker-local folder Run [dev up] to start the containers")
 		}
 
 	},
