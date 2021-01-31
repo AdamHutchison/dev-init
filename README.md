@@ -18,11 +18,17 @@ After you've confirmed `dev` is working, `cd` into a php project and run `dev in
 Available Commands:
 
 `build`       Build the dev-local containers
+
 `down`        Kill all running containsers
+
 `exec`        Exec a command with the php container
+
 `help`        Help about any command
+
 `install`     Installs the base docker configuration into your application
+
 `nginx-logs`  Tail nginx logs
+
 `up`         A brief description of your command
 
 ## Connecting to MySQL
