@@ -8,7 +8,7 @@ import (
 // upCmd represents the up command
 var upCmd = &cobra.Command{
 	Use:   "up",
-	Short: "A brief description of your command",
+	Short: "Launch docker containers defines in your ./docker-local/docker-compose.yml",
 	Run: func(cmd *cobra.Command, args []string) {
 		command := "docker-compose"
 		arguments := []string{"--file", "./docker-local/docker-compose.yml", "up", "-d"}
