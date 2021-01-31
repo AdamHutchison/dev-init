@@ -18,8 +18,10 @@ package cmd
 import (
 	"fmt"
 	"github.com/spf13/cobra"
+	"os"
 	"os/user"
 	"github.com/AdamHutchison/dev-init/utils"
+	"strings"
 )
 
 // installCmd represents the install command
@@ -37,6 +39,7 @@ var installCmd = &cobra.Command{
 		dir := usr.HomeDir + "/.config/dev-init/resources/docker-local"
 
 		utils.Exec("cp", "-r", dir, "./")
+		utils.Exec("bash", "-c", "echo \"COMPOSE_PROJECT_NAME=" + getCurrentDirName() + "\" >> .env")
 	},
 }
 
@@ -53,3 +56,16 @@ func init() {
 	// is called directly, e.g.:
 	// installCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
+
+func getCurrentDirName() string {
+	dir, err := os.Getwd()
+	if err != nil {
+		fmt.Println(utils.Fatal(err))
+	}
+
+	split := strings.Split(dir, "/")
+	
+	// return last item in slice as this is the name of the current folder
+	return split[len(split)-1]
+}
+

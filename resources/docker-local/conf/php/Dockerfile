@@ -24,8 +24,8 @@ RUN apt-get update && apt-get install -y \
         iproute2 \
         npm
 
-RUN pecl install xdebug \
-    && docker-php-ext-enable xdebug \
+RUN pecl install xdebug && docker-php-ext-enable xdebug \
+    && pecl install redis && docker-php-ext-enable redis \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-install -j$(nproc) intl \
     && docker-php-ext-install -j$(nproc) zip \
