@@ -28,7 +28,6 @@ var downCmd = &cobra.Command{
 
 		arguments := append([]string{"stop"}, split...)
 
-		fmt.Println("Stopping the following containers:", split)
 		utils.Exec("docker", arguments...)
 	},
 }

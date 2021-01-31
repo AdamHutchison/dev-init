@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/AdamHutchison/dev-init/utils"
 )
@@ -13,8 +12,6 @@ var upCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		command := "docker-compose"
 		arguments := []string{"--file", "./docker-local/docker-compose.yml", "up", "-d"}
-
-		fmt.Println("Running docker-compose --file ./docker-local/docker-compose.yml up -d")
 
 		utils.Exec(command, arguments...)
 	},
