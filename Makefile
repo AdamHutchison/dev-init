@@ -15,7 +15,9 @@ build_dev_init:
 	@go build -o dev
 	@if [ ! -d $(BIN_DIRECTORY) ]; then mkdir $(BIN_DIRECTORY); fi
 	@cp ./dev $(BIN_DIRECTORY)
+	@rm ./dev
 
 add_dev_init_to_path:
 	@echo "Adding dev tool to path"
-	@echo "export PATH=$(BIN_DIRECTORY):\$$PATH" >> ~/.zshrc
+	@if [ $(type -P dev) ]; then echo "found"; fi
+	@type -P "dev" && echo "dev command is already in PATH" || echo "export PATH=$(BIN_DIRECTORY):\$$PATH" >> ~/.zshrc
