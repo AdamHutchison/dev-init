@@ -1,27 +1,9 @@
-/*
-Copyright © 2021 NAME HERE <EMAIL ADDRESS>
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
 package cmd
 
 import (
-	"fmt"
 	"github.com/spf13/cobra"
-	"os"
-	"os/user"
 	"github.com/AdamHutchison/dev-init/utils"
-	"strings"
+	"fmt"
 )
 
 // installCmd represents the install command
@@ -29,43 +11,25 @@ var installCmd = &cobra.Command{
 	Use:   "install",
 	Short: "Installs the base docker configuration into your application",
 	Run: func(cmd *cobra.Command, args []string) {
-		usr, err := user.Current()
+		// Copy docker files
+		utils.Exec("cp", "-r", utils.ResourceDir(), "./")
+
+		php, err := cmd.Flags().GetString("php")
 
 		if err != nil {
 			fmt.Println(utils.Fatal(err))
-			return
 		}
 
-		dir := usr.HomeDir + "/.config/dev-init/resources/docker-local"
+		utils.Exec("bash", "-c", "sed -i '1s/^/FROM php:" + php + "-fpm'/ " + utils.PhpDockerFilePath())
 
-		utils.Exec("cp", "-r", dir, "./")
-		utils.Exec("bash", "-c", "echo \"COMPOSE_PROJECT_NAME=" + getCurrentDirName() + "\" >> .env")
+		// Add project name to env (used when naming containers)
+		utils.Exec("bash", "-c", "echo \"COMPOSE_PROJECT_NAME=" + utils.CurrentDirName() + "\" >> .env")
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(installCmd)
 
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// installCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// installCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	installCmd.Flags().String("php", "PHP8", "The version of php-fpm to use")
+	installCmd.MarkFlagRequired("php")
 }
-
-func getCurrentDirName() string {
-	dir, err := os.Getwd()
-	if err != nil {
-		fmt.Println(utils.Fatal(err))
-	}
-
-	split := strings.Split(dir, "/")
-	
-	// return last item in slice as this is the name of the current folder
-	return split[len(split)-1]
-}
-
