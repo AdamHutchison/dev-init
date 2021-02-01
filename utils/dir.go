@@ -45,3 +45,7 @@ func PhpDockerFilePath() string {
 func DataDirPath() string {
 	return CurrentDir() + "/docker-local/data"
 }
+
+func DockerComposeFilePath() string {
+	return CurrentDir() + "/docker-local/docker-compose.yml"
+}
