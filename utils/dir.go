@@ -41,3 +41,7 @@ func ResourceDir() string {
 func PhpDockerFilePath() string {
 	return CurrentDir() + "/docker-local/conf/php/Dockerfile"
 }
+
+func DataDirPath() string {
+	return CurrentDir() + "/docker-local/data"
+}
