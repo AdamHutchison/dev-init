@@ -29,6 +29,10 @@ var downCmd = &cobra.Command{
 		arguments := append([]string{"stop"}, split...)
 
 		utils.Exec("docker", arguments...)
+
+		arguments2 := append([]string{"rm"}, split...)
+
+		utils.Exec("docker", arguments2...)
 	},
 }
 
