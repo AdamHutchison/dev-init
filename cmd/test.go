@@ -17,6 +17,7 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
+	"fmt"
 	"github.com/AdamHutchison/dev-init/utils"
 )
 
@@ -26,12 +27,28 @@ var testCmd = &cobra.Command{
 	Short: "Exec a command with the php container",
 	Run: func(cmd *cobra.Command, args []string) {
 
-		arguments := []string{"--file", "docker-local/docker-compose.yml", "exec", "-T", "php", "./vendor/bin/phpunit"}
+		command := "./vendor/bin/phpunit"
+
+		arguments := []string{"--file", "docker-local/docker-compose.yml", "exec", "-T", "php", "/bin/bash", "-c"}
+
+		debug, err := cmd.Flags().GetBool("debug")
+
+		if err != nil {
+			fmt.Println(utils.Fatal(err))
+		}
+
+		if debug != true {
+			command = "export XDEBUG_MODE=develop && " + command
+		}
+		
+		arguments = append(arguments, command)
+
 		utils.Exec("docker-compose", arguments...)
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(testCmd)
+	testCmd.Flags().BoolP("debug", "d", false, "Enable Xdebug")
 
 }

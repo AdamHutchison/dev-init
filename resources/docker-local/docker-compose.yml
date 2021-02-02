@@ -20,6 +20,7 @@ services:
     environment:
       PHP_IDE_CONFIG: "serverName=${APP_URL}"
       XDEBUG_CONFIG: client_host=172.17.0.1
+      REDIS_PORT: 6379
 
   web:
     build:
