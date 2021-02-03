@@ -1,11 +1,8 @@
 package cmd
 
 import (
-	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/AdamHutchison/dev-init/utils"
-	"os/exec"
-	"strings"
 )
 
 // downCmd represents the down command
@@ -13,26 +10,9 @@ var downCmd = &cobra.Command{
 	Use:   "down",
 	Short: "Kill all running containsers",
 	Run: func(cmd *cobra.Command, args []string) {
-		out, err:= exec.Command("docker", "ps", "-q").Output()
-
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-
-		split := strings.Split(string(out), "\n")
-
-		if len(split) > 0 {
-    		split = split[:len(split)-1]
-		}
-
-		arguments := append([]string{"stop"}, split...)
-
+		containers := utils.GetRunningContainers()
+		arguments := append([]string{"stop"}, containers...)
 		utils.Exec("docker", arguments...)
-
-		arguments2 := append([]string{"rm"}, split...)
-
-		utils.Exec("docker", arguments2...)
 	},
 }
 
