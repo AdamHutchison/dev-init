@@ -35,7 +35,7 @@ RUN pecl install xdebug && docker-php-ext-enable xdebug \
     && docker-php-ext-install -j$(nproc) bcmath \
     && docker-php-ext-install -j$(nproc) soap
 
-RUN mv /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
+COPY php.ini /usr/local/etc/php/php.ini
 
 RUN pear config-set php_ini /usr/local/etc/php/php.ini
 
