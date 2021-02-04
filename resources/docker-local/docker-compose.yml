@@ -1,26 +1,39 @@
-version: '3'
+version: "3"
 services:
   php:
-    build:
-      context: ./conf/php
-      dockerfile: Dockerfile
-    restart: always
-    tty: true
-    user: ${UID}:${GID}
-    volumes:
-      - ./..:/var/www
-      - ~/.composer:/var/www/.composer
-    depends_on:
-      - mysql
-      - redis
-    network_mode: bridge
+    extends:
+      file: php.yml
+      service: php_base
     links:
       - mysql
       - redis
-    environment:
-      PHP_IDE_CONFIG: "serverName=${APP_URL}"
-      XDEBUG_CONFIG: client_host=172.17.0.1
-      REDIS_PORT: 6379
+    depends_on:
+      - mysql
+      - redis
+
+  queue:
+    extends:
+      file: php.yml
+      service: php_base
+    links:
+      - mysql
+      - redis
+    depends_on:
+      - mysql
+      - redis
+    command: bash -c 'php artisan queue:work'
+
+  cron:
+    extends:
+      file: php.yml
+      service: php_base
+    links:
+      - mysql
+      - redis
+    depends_on:
+      - mysql
+      - redis
+    entrypoint: /usr/local/bin/docker-cron-entrypoint
 
   web:
     build:

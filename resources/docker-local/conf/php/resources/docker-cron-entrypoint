@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+
+source "${BASH_SOURCE%/*}/entrypoints/docker-base-entrypoint"
+
+env >> /etc/environment
+
+exec cron -f
