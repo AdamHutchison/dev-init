@@ -35,7 +35,11 @@ func CurrentDirName() string  {
 }
 
 func ResourceDir() string {
-	return HomeDir() + "/.config/dev-init/resources/docker-local"
+	return HomeDir() + "/.config/dev-init/resources"
+}
+
+func TmpDir() string {
+	return HomeDir() + "/.config/dev-init/tmp"
 }
 
 func PhpDockerFilePath() string {

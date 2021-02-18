@@ -12,7 +12,7 @@ var installCmd = &cobra.Command{
 	Short: "Installs the base docker configuration into your application",
 	Run: func(cmd *cobra.Command, args []string) {
 		// Copy docker files
-		utils.Exec("cp", "-r", utils.ResourceDir(), "./")
+		utils.Exec("cp", "-r", utils.ResourceDir() + "/docker-local", "./")
 
 		php, err := cmd.Flags().GetString("php")
 
@@ -29,7 +29,7 @@ var installCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(installCmd)
-
-	installCmd.Flags().String("php", "PHP8", "The version of php-fpm to use")
+	
+	installCmd.Flags().String("php", "8.0", "The version of php-fpm to use")
 	installCmd.MarkFlagRequired("php")
 }
