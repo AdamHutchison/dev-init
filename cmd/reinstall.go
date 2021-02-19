@@ -19,18 +19,18 @@ var reinstallCmd = &cobra.Command{
 		}
 
 		// backup data dir
-		utils.Exec("cp", "-r", utils.DataDirPath(), utils.TmpDir())
+		utils.Copy(utils.DataDirPath(), utils.TmpDir())
 		
 		// remove original files
-		utils.Exec("rm", "-rf", utils.CurrentDir() + "/docker-local")
+		utils.Delete(utils.CurrentDir() + "/docker-local")
 
 		installCmd.Run(cmd, args)
 
 		// replace data dir
-		utils.Exec("cp", "-r", utils.TmpDir() + "/data", utils.CurrentDir() + "/docker-local")
+		utils.Copy(utils.TmpDir() + "/data", utils.CurrentDir() + "/docker-local")
 
 		// remove  temp data backup
-		utils.Exec("rm", "-rf", utils.TmpDir() + "/data")
+		utils.Delete(utils.TmpDir() + "/data")
 	},
 }
 

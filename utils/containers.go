@@ -1,9 +1,9 @@
 package utils
 
 import (
-	"strings"
 	"fmt"
 	"os/exec"
+	"strings"
 )
 
 func GetRunningContainers() []string {

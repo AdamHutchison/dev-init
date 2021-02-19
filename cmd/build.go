@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"github.com/AdamHutchison/dev-init/utils"
 	"github.com/spf13/cobra"
 )
@@ -11,18 +10,14 @@ var buildCmd = &cobra.Command{
 	Use:   "build",
 	Short: "Build the dev-local containers",
 	Run: func(cmd *cobra.Command, args []string) {
-		buildCommand := []string{"--file", "./docker-local/docker-compose.yml", "build"}
-		noCache, err := cmd.Flags().GetBool("no-cache")
-
-		if err != nil {
-			fmt.Println(utils.Fatal(err))
-		}
+		buildCommand := "build"
+		noCache, _ := cmd.Flags().GetBool("no-cache")
 
 		if noCache {
-			buildCommand = append(buildCommand, "--no-cache")
+			buildCommand += " --no-cache"
 		}
 
-		utils.Exec("docker-compose", buildCommand...)
+		utils.DockerCompose(buildCommand)
 	},
 }
 

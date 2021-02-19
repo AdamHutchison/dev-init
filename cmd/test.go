@@ -20,9 +20,7 @@ var testCmd = &cobra.Command{
 		addDebug(&command, debug)
 		addStopOnFailure(&command, stop)
 
-		arguments := append(getBaseCommand(), command)
-
-		utils.Exec("docker-compose", arguments...)
+		utils.Exec("docker-compose", "--file", "docker-local/docker-compose.yml", "exec", "-T", "php", "/bin/bash", "-c", command)
 	},
 }
 
@@ -33,10 +31,6 @@ func init() {
 	testCmd.Flags().String("filter", "", "Test class to filter by")
 }
 
-func getBaseCommand () []string {
-	return []string{"--file", "docker-local/docker-compose.yml", "exec", "-T", "php", "/bin/bash", "-c"}
-}
-
 func addFilter(command *string, filter string) {
 	if filter != "" {
 		*command = *command + " --filter " + filter
@@ -44,13 +38,13 @@ func addFilter(command *string, filter string) {
 }
 
 func addDebug(command *string, debug bool) {
-	if debug != true {
+	if !debug {
 		*command = "export XDEBUG_MODE=develop && " + *command
 	}
 }
 
 func addStopOnFailure(command *string, stop bool) {
-	if stop != false {
+	if !stop {
 		*command = *command + " --stop-on-failure"
 	}
 }

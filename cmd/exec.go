@@ -26,11 +26,7 @@ var execCmd = &cobra.Command{
 	Use:   "exec",
 	Short: "Exec a command with the php container",
 	Run: func(cmd *cobra.Command, args []string) {
-		command := "export XDEBUG_MODE=develop && " + strings.Join(args, " ")
-
-		arguments := []string{"--file", "docker-local/docker-compose.yml", "exec", "-T", "php" ,"/bin/bash", "-c", command}
-
-		utils.Exec("docker-compose", arguments...)
+		utils.DockerExec(strings.Join(args, " "))
 	},
 }
 

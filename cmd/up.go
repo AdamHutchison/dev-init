@@ -11,7 +11,8 @@ var upCmd = &cobra.Command{
 	Short: "Launch docker containers defines in your ./docker-local/docker-compose.yml",
 	Run: func(cmd *cobra.Command, args []string) {
 		rmCmd.Run(cmd, args)
-		utils.Exec("docker-compose", "--file", "./docker-local/docker-compose.yml", "up", "-d", "--remove-orphans")
+		command := "up -d"
+		utils.DockerCompose(command)
 	},
 }
 
