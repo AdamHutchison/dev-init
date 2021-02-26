@@ -33,4 +33,13 @@ Dev Init comes with some universal commands, these are based around managing doc
 
 ## Module
 
-Using modules, Dev Init can be extended to provide useful project / framework specific commands. Modules are kept in the module folder and consist of a `module.go` file and then any specific cobra commands you want to be available for only specifc project types. `module.go` should define an instance of `modules.Module` from the `"github.com/AdamHutchison/dev-init/modules"` package. `module.Module` has two fields, firstly the `Identifier` which represents a file that identifies the project type. This file should always be present in the root folder of the project and should be unique to that project type e.g. Laravel projects always have an `artisan` file in the root directory which is used as an identifier to initiate the laravel commands. 
+Using modules, Dev Init can be extended to provide useful project / framework specific commands. Modules are kept in the module folder and consist of a `module.go` file and then any specific cobra commands you want to be available for only specifc project types. `module.go` should define an instance of `modules.Module` from the `"github.com/AdamHutchison/dev-init/modules"` package. `module.Module` has two fields.
+
+
+Firstly `module.Modules` has an `Identifier` field which represents a file that identifies the project type. This file should always be present in the root folder of the project and should be unique to that project type e.g. Laravel projects always have an `artisan` file in the root directory which is used as an identifier to initiate the laravel commands. 
+
+
+Secondly, `module.Modules` has a `Commands` field which should return a slice containing the module commands.
+
+
+Once the module have been created, register it in the `moduleList` var contained in `bootstrap/commandManager.go`.
