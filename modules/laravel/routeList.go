@@ -1,4 +1,4 @@
-package cmd
+package laravel
 
 import (
 	"github.com/AdamHutchison/dev-init/utils"
@@ -16,7 +16,6 @@ var routeListCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(routeListCmd)
 	// routeListCmd.PersistentFlags().String("foo", "", "A help for foo")
 	// routeListCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

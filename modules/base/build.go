@@ -1,4 +1,4 @@
-package cmd
+package base
 
 import (
 	"github.com/AdamHutchison/dev-init/utils"
@@ -6,7 +6,7 @@ import (
 )
 
 // buildCmd represents the build command
-var buildCmd = &cobra.Command{
+var BuildCmd = &cobra.Command{
 	Use:   "build",
 	Short: "Build the dev-local containers",
 	Run: func(cmd *cobra.Command, args []string) {
@@ -22,7 +22,6 @@ var buildCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(buildCmd)
 	// buildCmd.PersistentFlags().String("foo", "", "A help for foo")
 	buildCmd.Flags().BoolP("no-cache", "", false, "Build images from scratch")
 }

@@ -1,4 +1,4 @@
-package cmd
+package laravel
 
 import (
 	"github.com/spf13/cobra"
@@ -25,7 +25,6 @@ var testCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(testCmd)
 	testCmd.Flags().BoolP("debug", "d", false, "Enable Xdebug")
 	testCmd.Flags().BoolP("stop-on-failure", "s", false, "Stop test run on first failure")
 	testCmd.Flags().String("filter", "", "Test class to filter by")

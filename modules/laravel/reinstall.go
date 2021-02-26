@@ -1,4 +1,4 @@
-package cmd
+package laravel
 
 import (
 	"github.com/spf13/cobra"
@@ -35,8 +35,6 @@ var reinstallCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(reinstallCmd)
-
 	reinstallCmd.Flags().String("php", "8.0", "The version of php-fpm to use")
 	reinstallCmd.MarkFlagRequired("php")
 }
