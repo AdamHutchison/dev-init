@@ -7,7 +7,7 @@ import (
 )
 
 // routeListCmd represents the routeList command
-var routeListCmd = &cobra.Command{
+var RouteListCmd = &cobra.Command{
 	Use:   "route",
 	Short: "List routes in Laravel project",
 	Run: func(cmd *cobra.Command, args []string) {

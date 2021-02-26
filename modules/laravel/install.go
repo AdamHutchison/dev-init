@@ -6,7 +6,7 @@ import (
 )
 
 // installCmd represents the install command
-var installCmd = &cobra.Command{
+var InstallCmd = &cobra.Command{
 	Use:   "install",
 	Short: "Installs the base docker configuration into your application",
 	Run: func(cmd *cobra.Command, args []string) {
@@ -22,6 +22,6 @@ var installCmd = &cobra.Command{
 }
 
 func init() {
-	installCmd.Flags().String("php", "8.0", "The version of php-fpm to use")
-	installCmd.MarkFlagRequired("php")
+	InstallCmd.Flags().String("php", "8.0", "The version of php-fpm to use")
+	InstallCmd.MarkFlagRequired("php")
 }

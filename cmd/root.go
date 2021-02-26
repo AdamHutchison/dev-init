@@ -44,7 +44,9 @@ func Execute() {
 
 func init() {
 	cobra.OnInitialize(initConfig)
+
 	bootstrap.RegisterBaseCmds(rootCmd)
+	bootstrap.RegisterProjectCmds(rootCmd)
 
 	// Here you will define your flags and configuration settings.
 	// Cobra supports persistent flags, which, if defined here,
