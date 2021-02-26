@@ -7,11 +7,11 @@ import (
 
 var Module = modules.Module {
 	Identifier: "",
-	Commands: []cobra.Command {
-		*BuildCmd,
-		*DownCmd,
-		*ExecCmd,
-		*RmCmd,
-		*UpCmd,
+	Commands: []*cobra.Command {
+		BuildCmd,
+		DownCmd,
+		ExecCmd,
+		RmCmd,
+		UpCmd,
 	},
 }

@@ -23,5 +23,5 @@ var BuildCmd = &cobra.Command{
 
 func init() {
 	// buildCmd.PersistentFlags().String("foo", "", "A help for foo")
-	buildCmd.Flags().BoolP("no-cache", "", false, "Build images from scratch")
+	BuildCmd.Flags().BoolP("no-cache", "", false, "Build images from scratch")
 }

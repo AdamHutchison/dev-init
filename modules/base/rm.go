@@ -11,7 +11,7 @@ var RmCmd = &cobra.Command{
 	Short: "Remove running containers",
 	Run: func(cmd *cobra.Command, args []string) {
 		containers := utils.GetRunningContainers()
-		downCmd.Run(cmd, args)
+		DownCmd.Run(cmd, args)
 		arguments2 := append([]string{"rm"}, containers...)
 		utils.Exec("docker", arguments2...)
 	},
