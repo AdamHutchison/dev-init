@@ -42,4 +42,4 @@ Firstly `module.Modules` has an `Identifier` field which represents a file that 
 Secondly, `module.Modules` has a `Commands` field which should return a slice containing the module commands.
 
 
-Once the module have been created, register it in the `moduleList` var contained in `bootstrap/moduleResolver.go`.
+Once the module have been created, register it in the `moduleList` var contained in `bootstrap/modules.go`.
