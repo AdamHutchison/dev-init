@@ -1,4 +1,4 @@
-package cmd
+package laravel
 
 import (
 	"github.com/spf13/cobra"
@@ -8,7 +8,7 @@ import (
 )
 
 // reinstallCmd represents the reinstall command
-var reinstallCmd = &cobra.Command{
+var ReinstallCmd = &cobra.Command{
 	Use:   "reinstall",
 	Short: "Reinstall the docker-local folder",
 	Run: func(cmd *cobra.Command, args []string) {
@@ -24,7 +24,7 @@ var reinstallCmd = &cobra.Command{
 		// remove original files
 		utils.Delete(utils.CurrentDir() + "/docker-local")
 
-		installCmd.Run(cmd, args)
+		InstallCmd.Run(cmd, args)
 
 		// replace data dir
 		utils.Copy(utils.TmpDir() + "/data", utils.CurrentDir() + "/docker-local")
@@ -35,8 +35,6 @@ var reinstallCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(reinstallCmd)
-
-	reinstallCmd.Flags().String("php", "8.0", "The version of php-fpm to use")
-	reinstallCmd.MarkFlagRequired("php")
+	ReinstallCmd.Flags().String("php", "8.0", "The version of php-fpm to use")
+	ReinstallCmd.MarkFlagRequired("php")
 }

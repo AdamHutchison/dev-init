@@ -1,4 +1,4 @@
-package cmd
+package base
 
 import (
 	"github.com/spf13/cobra"
@@ -6,7 +6,7 @@ import (
 )
 
 // downCmd represents the down command
-var downCmd = &cobra.Command{
+var DownCmd = &cobra.Command{
 	Use:   "down",
 	Short: "Kill all running containsers",
 	Run: func(cmd *cobra.Command, args []string) {
@@ -17,8 +17,6 @@ var downCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(downCmd)
-
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command

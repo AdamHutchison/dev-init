@@ -1,4 +1,4 @@
-package cmd
+package laravel
 
 import (
 	"github.com/spf13/cobra"
@@ -6,7 +6,7 @@ import (
 )
 
 // execCmd represents the exec command
-var testCmd = &cobra.Command{
+var TestCmd = &cobra.Command{
 	Use:   "test",
 	Short: "Exec a command with the php container",
 	Run: func(cmd *cobra.Command, args []string) {
@@ -25,10 +25,9 @@ var testCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(testCmd)
-	testCmd.Flags().BoolP("debug", "d", false, "Enable Xdebug")
-	testCmd.Flags().BoolP("stop-on-failure", "s", false, "Stop test run on first failure")
-	testCmd.Flags().String("filter", "", "Test class to filter by")
+	TestCmd.Flags().BoolP("debug", "d", false, "Enable Xdebug")
+	TestCmd.Flags().BoolP("stop-on-failure", "s", false, "Stop test run on first failure")
+	TestCmd.Flags().String("filter", "", "Test class to filter by")
 }
 
 func addFilter(command *string, filter string) {

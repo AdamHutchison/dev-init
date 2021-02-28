@@ -1,4 +1,4 @@
-package cmd
+package laravel
 
 import (
 	"github.com/AdamHutchison/dev-init/utils"
@@ -7,7 +7,7 @@ import (
 )
 
 // artCmd represents the art command
-var artCmd = &cobra.Command{
+var ArtCmd = &cobra.Command{
 	Use:   "art",
 	Short: "Run php artisan command inside docker container",
 	Run: func(cmd *cobra.Command, args []string) {
@@ -16,8 +16,6 @@ var artCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(artCmd)
-
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command

@@ -1,4 +1,4 @@
-package cmd
+package laravel
 
 import (
 	"github.com/AdamHutchison/dev-init/utils"
@@ -7,7 +7,7 @@ import (
 )
 
 // routeListCmd represents the routeList command
-var routeListCmd = &cobra.Command{
+var RouteListCmd = &cobra.Command{
 	Use:   "route",
 	Short: "List routes in Laravel project",
 	Run: func(cmd *cobra.Command, args []string) {
@@ -16,7 +16,6 @@ var routeListCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(routeListCmd)
 	// routeListCmd.PersistentFlags().String("foo", "", "A help for foo")
 	// routeListCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

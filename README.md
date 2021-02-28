@@ -13,9 +13,11 @@ Once you have run the Makefile check that the `dev` command is globally installe
 
 After you've confirmed `dev` is working, `cd` into a php project and run `dev install`. This will create a `docker-local` folder containing all the config you need for your dev environment.
 
-## Commands
+## Base Commands
 
 Available Commands:
+
+Dev Init comes with some universal commands, these are based around managing docker containers and apply to all project types:
 
 `build`       Build the dev-local containers
 
@@ -27,9 +29,17 @@ Available Commands:
 
 `install`     Installs the base docker configuration into your application
 
-`nginx-logs`  Tail nginx logs
-
 `up`         A brief description of your command
 
-## Connecting to MySQL
-By default MySQL will be running on port `3306`. You can connect to the instance using the `root` user. The password is `password`. You will need to run `dev down` before running `dev up` on a different environment otherwise MySQL will clash (due to 3306 being taken by the old instance) and an error will be thrown.
+## Modules
+
+Using modules, Dev Init can be extended to provide useful project / framework specific commands. Modules are kept in the module folder and consist of a `module.go` file and then any specific cobra commands you want to be available for only specifc project types. `module.go` should define an instance of `modules.Module` from the `"github.com/AdamHutchison/dev-init/modules"` package. `module.Module` has two fields.
+
+
+Firstly `module.Modules` has an `Identifier` field which represents a file that identifies the project type. This file should always be present in the root folder of the project and should be unique to that project type e.g. Laravel projects always have an `artisan` file in the root directory which is used as an identifier to initiate the laravel commands. 
+
+
+Secondly, `module.Modules` has a `Commands` field which should return a slice containing the module commands.
+
+
+Once the module have been created, register it in the `moduleList` var contained in `bootstrap/modules.go`.
