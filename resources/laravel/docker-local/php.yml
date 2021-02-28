@@ -1,0 +1,16 @@
+version: "3"
+services:
+  php_base:
+    build:
+      context: ./conf/php
+      dockerfile: Dockerfile
+    restart: always
+    tty: true
+    user: ${UID}:${GID}
+    volumes:
+      - ./..:/var/www
+      - ~/.composer:/var/www/.composer
+    network_mode: bridge
+    environment:
+      XDEBUG_CONFIG: client_host=172.17.0.1
+      REDIS_PORT: 6379

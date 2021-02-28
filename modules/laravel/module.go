@@ -6,6 +6,7 @@ import (
 )
 
 var Module = modules.Module {
+	Name: "laravel",
 	Identifier: "artisan",
 	Commands: []*cobra.Command {
 		ArtCmd,

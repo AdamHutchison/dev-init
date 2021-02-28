@@ -1,0 +1,81 @@
+version: "3"
+services:
+  php:
+    extends:
+      file: php.yml
+      service: php_base
+    links:
+      - mysql
+      - redis
+    depends_on:
+      - mysql
+      - redis
+
+  queue:
+    extends:
+      file: php.yml
+      service: php_base
+    links:
+      - mysql
+      - redis
+    depends_on:
+      - mysql
+      - redis
+    command: bash -c 'php artisan queue:work'
+
+  cron:
+    extends:
+      file: php.yml
+      service: php_base
+    user: root
+    links:
+      - mysql
+      - redis
+    depends_on:
+      - mysql
+      - redis
+    entrypoint: /usr/local/bin/docker-cron-entrypoint
+
+  web:
+    build:
+      context: ./
+      dockerfile: ./conf/nginx/Dockerfile
+    volumes:
+      - ./..:/var/www
+      - ./conf/nginx/netsells.test.crt:/etc/nginx/netsells.test.crt
+      - ./conf/nginx/netsells.test.key:/etc/nginx/netsells.test.key
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    tty: true
+    depends_on:
+      - php
+      - mysql
+      - redis
+    network_mode: bridge
+    links:
+      - php
+
+  mysql:
+    image: library/mysql
+    user: "${UID}:${GID}"
+    restart: always
+    environment:
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - 3306:3306
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    network_mode: bridge
+
+  redis:
+    image: redis
+    user: "${UID}:${GID}"
+    ports:
+      - 6379:6379
+    restart: always
+    volumes:
+      - ./data/redis:/data
+    network_mode: bridge

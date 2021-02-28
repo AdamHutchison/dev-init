@@ -8,12 +8,13 @@ import (
 )
 
 func RegisterProjectCmds(cmd *cobra.Command) {
-	for _, module := range moduleList {
+	for _, module := range ModuleList {
 
 		identifier := utils.CurrentDir() + "/" + module.GetIdentifier()
 
 		if _, err := os.Stat(identifier); err == nil {
 			registerCmds(cmd, module)
+			break
 		}
 	}
 }

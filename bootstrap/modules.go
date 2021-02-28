@@ -8,6 +8,6 @@ import (
 
 var baseModule = base.Module
 
-var moduleList = []modules.ModuleInterface{
+var ModuleList = []modules.ModuleInterface{
 	laravel.Module,
 }
