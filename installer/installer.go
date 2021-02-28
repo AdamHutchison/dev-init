@@ -12,6 +12,14 @@ type InstallerInterface interface {
 }
 
 type installer struct{}
+ 
+func (i installer) RunInstallCommand(m modules.ModuleInterface) {
+	for _, command := range m.GetCommands() {
+		if command.Use == "install" {
+			command.Run()
+		}
+	}
+}
 
 func (i installer) GetModuleResourceFolder(m modules.ModuleInterface) string {
 	for _, module := range bootstrap.ModuleList {
