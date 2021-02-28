@@ -31,7 +31,7 @@ Dev Init comes with some universal commands, these are based around managing doc
 
 `up`         A brief description of your command
 
-## Module
+## Modules
 
 Using modules, Dev Init can be extended to provide useful project / framework specific commands. Modules are kept in the module folder and consist of a `module.go` file and then any specific cobra commands you want to be available for only specifc project types. `module.go` should define an instance of `modules.Module` from the `"github.com/AdamHutchison/dev-init/modules"` package. `module.Module` has two fields.
 
