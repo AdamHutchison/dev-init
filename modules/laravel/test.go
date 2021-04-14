@@ -43,7 +43,7 @@ func addDebug(command *string, debug bool) {
 }
 
 func addStopOnFailure(command *string, stop bool) {
-	if !stop {
+	if stop {
 		*command = *command + " --stop-on-failure"
 	}
 }

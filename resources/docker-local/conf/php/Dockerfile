@@ -1,32 +1,43 @@
 
 
 RUN apt-get update && apt-get install -y \
-        zsh \
-        vim \
-        cron \
-        libfreetype6-dev \
-        libjpeg62-turbo-dev \
-        libmcrypt-dev \
-        libpng-dev \
-        libicu-dev \
-        libpq-dev \
-        libxpm-dev \
-        libvpx-dev \
-        libzip-dev \
-        libwebp-dev \
-        libxml2-dev \
-        gnupg \
-        gnupg1 \
-        gnupg2 \
-        wget \
-        unzip \
-        git \
-        iputils-ping \
-        iproute2 \
-        npm
+    zsh \
+    vim \
+    cron \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libmagickwand-dev \
+    libmcrypt-dev \
+    libpng-dev \
+    libicu-dev \
+    libpq-dev \
+    libxpm-dev \
+    libvpx-dev \
+    libzip-dev \
+    libwebp-dev \
+    libxml2-dev \
+    gnupg \
+    gnupg1 \
+    gnupg2 \
+    wget \
+    unzip \
+    git \
+    iputils-ping \
+    iproute2 \
+    npm
+
+# Build imagik from source until pecl release is created (date today 13-April-2021)
+RUN git clone https://github.com/Imagick/imagick \
+    && cd imagick \
+    && phpize && ./configure \
+    && make \
+    && make install
+
 
 RUN pecl install xdebug && docker-php-ext-enable xdebug \
     && pecl install redis && docker-php-ext-enable redis \
+    # Uncomment the below line and delete the installs from source for imagik above once pecl release a php8 version
+    # && pecl install imagick && docker-php-ext-enable imagick \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-install -j$(nproc) intl \
     && docker-php-ext-install -j$(nproc) zip \
