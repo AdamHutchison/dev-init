@@ -1,0 +1,43 @@
+version: "3"
+services:
+  php:
+    extends:
+      file: php.yml
+      service: php_base
+    links:
+      - mysql
+    depends_on:
+      - mysql
+
+  web:
+    build:
+      context: ./
+      dockerfile: ./conf/nginx/Dockerfile
+    volumes:
+      - ./..:/var/www
+      - ./conf/nginx/netsells.test.crt:/etc/nginx/netsells.test.crt
+      - ./conf/nginx/netsells.test.key:/etc/nginx/netsells.test.key
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    tty: true
+    depends_on:
+      - php
+      - mysql
+    network_mode: bridge
+    links:
+      - php
+
+  mysql:
+    image: library/mysql
+    user: "${UID}:${GID}"
+    restart: always
+    environment:
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - 3306:3306
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    network_mode: bridge

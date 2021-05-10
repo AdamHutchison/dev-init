@@ -1,4 +1,4 @@
-package laravel
+package wordpress
 
 import (
 	"github.com/spf13/cobra"
@@ -11,7 +11,7 @@ var InstallCmd = &cobra.Command{
 	Short: "Installs the base docker configuration into your application",
 	Run: func(cmd *cobra.Command, args []string) {
 		// Copy docker files
-		utils.Copy(utils.ResourceDir() + "/laravel/docker-local", "./")
+		utils.Copy(utils.ResourceDir() + "/wordpress/docker-local", "./")
 
 		php, _ := cmd.Flags().GetString("php")
 
