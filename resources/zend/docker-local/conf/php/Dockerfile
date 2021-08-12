@@ -32,12 +32,7 @@ RUN git clone https://github.com/Imagick/imagick \
     && make \
     && make install
 
-
-RUN pecl install xdebug && docker-php-ext-enable xdebug \
-    && pecl install redis && docker-php-ext-enable redis \
-    # Uncomment the below line and delete the installs from source for imagik above once pecl release a php8 version
-    # && pecl install imagick && docker-php-ext-enable imagick \
-    && docker-php-ext-install -j$(nproc) gd \
+RUN docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-install -j$(nproc) intl \
     && docker-php-ext-install -j$(nproc) zip \
     && docker-php-ext-install -j$(nproc) pdo_mysql \
@@ -53,16 +48,6 @@ COPY resources/crontab /crontab
 RUN chmod 777 /usr/local/bin/docker-cron-entrypoint
 
 RUN pear config-set php_ini /usr/local/etc/php/php.ini
-
-# # Xdebug 2
-# RUN echo "xdebug.idekey=PHPSTORM" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-#     && echo "xdebug.mode=debug" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-#     && echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-#     && echo "xdebug.discover_client_host=1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-
-# Xdebug 3
-RUN echo "xdebug.mode=debug" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
-    && echo "xdebug.start_with_request=yes" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 WORKDIR /var/www
 

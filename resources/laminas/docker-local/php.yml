@@ -11,7 +11,7 @@ services:
       - ./..:/var/www
       - ~/.composer:/var/www/.composer
     network_mode: bridge
-    environment:
+    environment: 
       # client_host=172.17.0.1 for linux
       # client_host=host.docker.internal for windows
       XDEBUG_CONFIG: client_host=host.docker.internal

@@ -23,8 +23,7 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     iputils-ping \
-    iproute2 \
-    npm
+    iproute2
 
 # Build imagik from source until pecl release is created (date today 13-April-2021)
 RUN git clone https://github.com/Imagick/imagick \
@@ -66,9 +65,6 @@ RUN echo "xdebug.mode=debug" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.
     && echo "xdebug.start_with_request=yes" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 WORKDIR /var/www
-
-# Update npm
-RUN npm i npm@latest -g
 
 # Install composer
 COPY resources/install_composer.sh /root/
