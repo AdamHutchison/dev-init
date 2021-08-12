@@ -8,6 +8,8 @@ services:
       - mysql
     depends_on:
       - mysql
+    volumes:
+      - ./data/tmp:/tmp
 
   web:
     build:
