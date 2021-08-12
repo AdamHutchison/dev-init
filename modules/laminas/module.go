@@ -1,8 +1,9 @@
 package laminas
 
 import (
-	"github.com/spf13/cobra"
 	"github.com/AdamHutchison/dev-init/modules"
+	"github.com/AdamHutchison/dev-init/modules/php"
+	"github.com/spf13/cobra"
 )
 
 var Module = modules.Module {
@@ -10,6 +11,6 @@ var Module = modules.Module {
 	Commands: []*cobra.Command {
 		InstallCmd,
 		ReinstallCmd,
-		TestCmd,
+		php.TestCmd,
 	},
 }
