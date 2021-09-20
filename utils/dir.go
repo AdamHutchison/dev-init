@@ -42,8 +42,8 @@ func TmpDir() string {
 	return HomeDir() + "/.config/dev-init/tmp"
 }
 
-func PhpDockerFilePath() string {
-	return CurrentDir() + "/docker-local/conf/php/Dockerfile"
+func DockerFilePath(relativePath string) string {
+	return CurrentDir() + "/" + relativePath
 }
 
 func DataDirPath() string {

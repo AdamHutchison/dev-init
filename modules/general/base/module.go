@@ -6,7 +6,7 @@ import (
 )
 
 var Module = modules.Module {
-	Identifier: "",
+	Name: "base",
 	Commands: []*cobra.Command {
 		BuildCmd,
 		DownCmd,

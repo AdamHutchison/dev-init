@@ -1,16 +1,16 @@
-package zend
+package buffalo
 
 import (
 	"github.com/AdamHutchison/dev-init/modules"
-	"github.com/AdamHutchison/dev-init/modules/php"
 	"github.com/spf13/cobra"
 )
 
 var Module = modules.Module {
-	Identifier: "config/modules.config.php",
+	Name: "buffalo",
+	Identifier: ".buffalo.dev.yml",
+	DockerImage: "golang",
+	DockerFilePath: "docker-local/conf/go/Dockerfile",
 	Commands: []*cobra.Command {
-		InstallCmd,
 		ReinstallCmd,
-		php.TestCmd,
 	},
 }

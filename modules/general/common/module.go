@@ -1,14 +1,13 @@
-package buffalo
+package common
 
 import (
-	"github.com/AdamHutchison/dev-init/modules"
 	"github.com/spf13/cobra"
+	"github.com/AdamHutchison/dev-init/modules"
 )
 
 var Module = modules.Module {
-	Identifier: ".buffalo.dev.yml",
+	Name: "base",
 	Commands: []*cobra.Command {
 		InstallCmd,
-		ReinstallCmd,
 	},
 }

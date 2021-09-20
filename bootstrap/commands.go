@@ -2,24 +2,22 @@ package bootstrap
 
 import (
 	"github.com/AdamHutchison/dev-init/modules"
-	"github.com/AdamHutchison/dev-init/utils"
+	r "github.com/AdamHutchison/dev-init/modules/register"
 	"github.com/spf13/cobra"
-	"os"
 )
 
 func RegisterProjectCmds(cmd *cobra.Command) {
-	for _, module := range moduleList {
+	module := r.GetContextModule()
 
-		identifier := utils.CurrentDir() + "/" + module.GetIdentifier()
-
-		if _, err := os.Stat(identifier); err == nil {
-			registerCmds(cmd, module)
-		}
+	if module.Name != "" {
+		registerCmds(r.GetCommonModule())
 	}
+	registerCmds(cmd, module)
+
 }
 
 func RegisterBaseCmds(cmd *cobra.Command) {
-	registerCmds(cmd, baseModule)
+	registerCmds(cmd, r.GetBaseModule())
 }
 
 func registerCmds(cmd *cobra.Command, module modules.ModuleInterface) {
