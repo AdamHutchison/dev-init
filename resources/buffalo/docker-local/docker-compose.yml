@@ -1,0 +1,27 @@
+version: "3"
+services:
+  go:
+    build:
+      context: ./conf/go
+      dockerfile: Dockerfile
+    ports:
+      - 80:3000
+    restart: always
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    volumes:
+      - ./data/tmp:/tmp
+
+  postgres:
+    image: postgres
+    user: "${UID}:${GID}"
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+    ports:
+      - 5432:5432
+    volumes:
+      - ./data/postgres:/var/lib/postgres
+    network_mode: bridge
