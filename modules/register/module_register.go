@@ -8,7 +8,6 @@ import (
 	"github.com/AdamHutchison/dev-init/modules/context_modules/laminas"
 	"github.com/AdamHutchison/dev-init/modules/context_modules/laravel"
 	"github.com/AdamHutchison/dev-init/modules/context_modules/wordpress"
-	"github.com/AdamHutchison/dev-init/modules/general/common"
 	"github.com/AdamHutchison/dev-init/utils"
 )
 
@@ -20,14 +19,6 @@ func GetContextModules() []modules.ModuleInterface {
 		laminas.Module,
 		buffalo.Module,
 	}
-}
-
-func GetBaseModule() modules.ModuleInterface {
-	return base.Module
-}
-
-func GetCommonModule() modules.ModuleInterface {
-	return common.Module
 }
 
 func GetContextModule() modules.ModuleInterface {

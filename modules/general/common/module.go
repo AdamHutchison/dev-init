@@ -9,5 +9,6 @@ var Module = modules.Module {
 	Name: "base",
 	Commands: []*cobra.Command {
 		InstallCmd,
+		ReinstallCmd,
 	},
 }

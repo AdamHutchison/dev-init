@@ -14,11 +14,11 @@ var InstallCmd = &cobra.Command{
 		module := register.GetContextModule()
 
 		// Copy docker files
-		utils.Copy(utils.ResourceDir() + module.GetName() + "docker-local", "./")
+		utils.Copy(utils.ResourceDir() + "/" + module.GetName() + "/docker-local", "./")
 
 		version, _ := cmd.Flags().GetString("version")
 
-		utils.PrintTop("FROM " + module.GetDockerImage() + version, utils.DockerFilePath(module.GetDockerFilePath()))
+		utils.PrintTop("FROM " + module.GetDockerImage() + ":" + version, utils.DockerFilePath(module.GetDockerFilePath()))
 		utils.PrintBottom("COMPOSE_PROJECT_NAME=" + utils.CurrentDirName(), ".env")
 		utils.Link(utils.CurrentDir() + "/.env", utils.CurrentDir() + "/docker-local/")
 	},

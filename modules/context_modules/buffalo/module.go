@@ -11,6 +11,5 @@ var Module = modules.Module {
 	DockerImage: "golang",
 	DockerFilePath: "docker-local/conf/go/Dockerfile",
 	Commands: []*cobra.Command {
-		ReinstallCmd,
 	},
 }

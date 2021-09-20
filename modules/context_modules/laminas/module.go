@@ -12,7 +12,6 @@ var Module = modules.Module {
 	DockerImage: "php",
 	DockerFilePath: "docker-local/conf/php/Dockerfile",
 	Commands: []*cobra.Command {
-		ReinstallCmd,
 		php.TestCmd,
 	},
 }

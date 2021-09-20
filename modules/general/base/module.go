@@ -13,5 +13,6 @@ var Module = modules.Module {
 		ExecCmd,
 		RmCmd,
 		UpCmd,
+		LogsCmd,
 	},
 }

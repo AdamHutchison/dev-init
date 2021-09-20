@@ -20,6 +20,10 @@ type Module struct {
 	Commands       []*cobra.Command
 }
 
+func (m Module) GetName() string {
+	return m.Name
+}
+
 func (m Module) GetIdentifier() string {
 	return m.Identifier
 }

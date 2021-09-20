@@ -1,11 +1,13 @@
 version: "3"
 services:
   go:
+    user: ${UID}:${GID}
     build:
       context: ./conf/go
       dockerfile: Dockerfile
     ports:
       - 80:3000
+      - 443:3000
     restart: always
     links:
       - postgres
@@ -13,6 +15,7 @@ services:
       - postgres
     volumes:
       - ./data/tmp:/tmp
+      - ./..:/var/www
 
   postgres:
     image: postgres

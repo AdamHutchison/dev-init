@@ -1,4 +1,4 @@
-package buffalo
+package common
 
 import (
 	"github.com/spf13/cobra"
@@ -35,6 +35,6 @@ var ReinstallCmd = &cobra.Command{
 }
 
 func init() {
-	ReinstallCmd.Flags().String("go", "1.17.1", "The version of go to use")
-	ReinstallCmd.MarkFlagRequired("go")
+	ReinstallCmd.Flags().String("version", "", "Image version e.g. 8.0-fpm")
+	ReinstallCmd.MarkFlagRequired("version")
 }
