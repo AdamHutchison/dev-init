@@ -8,10 +8,7 @@ import (
 var Module = modules.Module {
 	Name: "base",
 	Commands: []*cobra.Command {
-		BuildCmd,
 		DownCmd,
 		RmCmd,
-		UpCmd,
-		LogsCmd,
 	},
 }

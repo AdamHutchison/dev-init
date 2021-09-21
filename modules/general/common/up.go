@@ -1,6 +1,7 @@
-package base
+package common
 
 import (
+	"github.com/AdamHutchison/dev-init/modules/general/base"
 	"github.com/AdamHutchison/dev-init/utils"
 	"github.com/spf13/cobra"
 )
@@ -10,7 +11,7 @@ var UpCmd = &cobra.Command{
 	Use:   "up",
 	Short: "Launch docker containers defines in your ./docker-local/docker-compose.yml",
 	Run: func(cmd *cobra.Command, args []string) {
-		RmCmd.Run(cmd, args)
+		base.RmCmd.Run(cmd, args)
 		command := "up -d"
 		utils.DockerCompose(command)
 	},

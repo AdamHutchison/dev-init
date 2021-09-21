@@ -1,4 +1,4 @@
-package base
+package common
 
 import (
 	"github.com/AdamHutchison/dev-init/utils"
