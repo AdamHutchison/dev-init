@@ -1,9 +1,15 @@
 # dev-init
 
-Dev Init is a simple CLI tool that allows you to easily install and manage docker based dev environments for your PHP projects.
+Dev Init is a simple CLI tool that allows you to easily install and manage docker based dev environments for several project types. Dev init will install a `docker-local` folder into your project that contains the full docker environment required to start developing. Dev-init also provides you with convenience commands to allow you to do common tasks from witin the containers.
 
 ## Dependencies
 * Dev-init requires that go is installed on your machine. Installation details can be found [here](https://golang.org/doc/install).
+
+## Definitions
+
+* Context - this refers to the directory from where the `dev` command is being run from. `dev` will alter the commands available depending on which framework or project type it detects within the current directory.
+
+* Module - A module refers to the driver code that allows dev init to be context aware (see the `Modules` section for more details).
 
 ## Instalation
 
@@ -16,11 +22,19 @@ Once you have run the Makefile check that the `dev` command is globally installe
 
 After you've confirmed `dev` is working, `cd` into a php project and run `dev install`. This will create a `docker-local` folder containing all the config you need for your dev environment.
 
-## Base Commands
+##  Commands
 
-Available Commands:
+### Base Commands
 
-Dev Init comes with some universal commands, these are based around managing docker containers and apply to all project types:
+These commands are available regardless of where you run the `dev` command from.
+
+`down`        Kill all running containsers
+
+`rm`          Remove all containers
+
+### Common Commands
+
+These commands are available from within any context:
 
 `build`       Build the dev-local containers
 
@@ -32,13 +46,15 @@ Dev Init comes with some universal commands, these are based around managing doc
 
 `install`     Installs the base docker configuration into your application
 
-`up`         A brief description of your command
+`up`          Brings the docker files for the project up
+
+`logs`        Shows the docker-compose logs for the project
 
 `ssh`        SSH into a given docker compose container. Either provide the command with a `--service` (name of a service from `docker-local/docker-compose.yml`) flag or it'll default to the main docker compose service.
 
 ## Context Awareness
 
-Dev-init is context aware. this eans that the available `dev` commands will alter depending on which project type you are in. Currently the supported frameworks are:
+Dev-init is context aware. this means that the available `dev` commands will alter depending on which project type you are in. Currently the supported frameworks are:
 
 * Laravel (PHP)
 * Wordpress (PHP)
@@ -86,9 +102,9 @@ var Module = modules.Module {
 }
 ```
 
-### The Base Module
+### The Base Module (Digging Deeper)
 
-The base module defines commands that are always available
+The base module defines commands that are always available.
 
 ### The Common Module
 The common module defines commands that are availavble from within any context (but only if thwre is a context!).
