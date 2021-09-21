@@ -10,8 +10,8 @@ func Delete(dir string) {
 	Exec("rm", "-rf", dir)
 }
 
-func DockerExec(command string) {
-	Exec("docker-compose", "--file", "docker-local/docker-compose.yml", "exec", "-T", "php", "/bin/bash", "-c", "export XDEBUG_MODE=develop && " + command)
+func DockerExec(service string, command string) {
+	Exec("docker-compose", "--file", "docker-local/docker-compose.yml", "exec", "-T", service, "/bin/bash", "-c", "export XDEBUG_MODE=develop && " + command)
 }
 
 func DockerCompose(command string) {

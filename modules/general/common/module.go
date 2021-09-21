@@ -10,5 +10,7 @@ var Module = modules.Module {
 	Commands: []*cobra.Command {
 		InstallCmd,
 		ReinstallCmd,
+		ExecCmd,
+		SshCmd,
 	},
 }

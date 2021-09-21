@@ -11,7 +11,7 @@ var RouteListCmd = &cobra.Command{
 	Use:   "route",
 	Short: "List routes in Laravel project",
 	Run: func(cmd *cobra.Command, args []string) {
-		utils.DockerExec("php artisan route:list | grep " + strings.Join(args, " "))
+		utils.DockerExec("php", "php artisan route:list | grep " + strings.Join(args, " "))
 	},
 }
 

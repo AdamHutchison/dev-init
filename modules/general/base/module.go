@@ -10,7 +10,6 @@ var Module = modules.Module {
 	Commands: []*cobra.Command {
 		BuildCmd,
 		DownCmd,
-		ExecCmd,
 		RmCmd,
 		UpCmd,
 		LogsCmd,

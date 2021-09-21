@@ -1,6 +1,6 @@
 version: "3"
 services:
-  go:
+  golang:
     user: ${UID}:${GID}
     build:
       context: ./conf/go
@@ -14,17 +14,18 @@ services:
     depends_on:
       - postgres
     volumes:
-      - ./data/tmp:/tmp
       - ./..:/var/www
+    network_mode: bridge
 
   postgres:
     image: postgres
-    user: "${UID}:${GID}"
+    user: root
     restart: always
     environment:
-      POSTGRES_PASSWORD: example
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     ports:
       - 5432:5432
     volumes:
-      - ./data/postgres:/var/lib/postgres
+      - ./data/postgres:/var/lib/postgresql/data
     network_mode: bridge

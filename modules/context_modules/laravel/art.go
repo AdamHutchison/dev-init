@@ -11,7 +11,7 @@ var ArtCmd = &cobra.Command{
 	Use:   "art",
 	Short: "Run php artisan command inside docker container",
 	Run: func(cmd *cobra.Command, args []string) {
-		utils.DockerExec("php artisan " + strings.Join(args, " "))
+		utils.DockerExec("php", "php artisan " + strings.Join(args, " "))
 	},
 }
 
