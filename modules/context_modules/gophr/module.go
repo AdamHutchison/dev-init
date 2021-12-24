@@ -1,4 +1,4 @@
-package zend
+package gophr
 
 import (
 	"github.com/AdamHutchison/dev-init/modules"
@@ -7,10 +7,10 @@ import (
 )
 
 var Module = modules.Module {
-	Name: "zend",
-	Identifier: "config/modules.config.php",
+	Name: "gophr",
+	Identifier: "config/application.config.php",
 	DockerImage: "php",
-	DockerFilePath: "docker-local/conf/php/Dockerfile",
+	DockerFilePath: "docker-local/app/Dockerfile",
 	Commands: []*cobra.Command {
 		php.TestCmd,
 	},

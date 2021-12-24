@@ -11,7 +11,7 @@ var TestCmd = &cobra.Command{
 	Use:   "test",
 	Short: "Exec a command with the php container",
 	Run: func(cmd *cobra.Command, args []string) {
-		command := "./vendor/bin/phpunit"
+		command := "./vendor/bin/phpunit --colors"
 
 		debug, _ := cmd.Flags().GetBool("debug")
 		profile, _ := cmd.Flags().GetBool("profile")

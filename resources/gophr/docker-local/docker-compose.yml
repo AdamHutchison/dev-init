@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  php:
+    build:
+      context: ./..
+      dockerfile: docker-local/app/Dockerfile
+    entrypoint: /gophr/backend/docker-local/app/google-app-start
+    volumes:
+      - ./../:/gophr/backend
+    networks:
+      - gophr-dev:backend
+    ports:
+      - "8203:8203"
+      - "8003:8003"
+      - "8103:8103"
+    depends_on:
+      - database
+
+  database:
+    build:
+      context: ./..
+      dockerfile: docker-local/database/Dockerfile
+    restart: always
+    networks:
+      - gophr-dev:backend
+    ports:
+      - "3309:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_ROOT_HOST: "%"
+    volumes:
+      - /var/data/mysql:/var/lib/mysql
+
+networks:
+  gophr:backend:
+    name: gophr-dev:backend

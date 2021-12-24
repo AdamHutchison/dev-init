@@ -62,7 +62,3 @@ RUN chmod 755 /usr/local/bin/composer && chmod 755 /usr/local/etc/php/composer.p
 RUN mkdir /home/root && chmod 777 /home/root
 
 ENV HOME /home/root
-
-# Setup cron pointing to artisan:schedule
-# We'll only register the cronfile if artisan is present (to allow for auto-registering cron with laravel)
-ONBUILD RUN if [ -f "/var/www/artisan" ]; then /usr/bin/crontab /crontab; fi

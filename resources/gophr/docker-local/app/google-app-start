@@ -1,0 +1,15 @@
+#!/bin/bash
+
+/gophr/google_appengine/dev_appserver.py\
+ --php_remote_debugging=yes \
+ --php_executable_path=/usr/php5/bin/php-cgi \
+ --skip_sdk_update_check=yes \
+ --host=0.0.0.0 \
+ --admin_host=0.0.0.0 \
+ --api_host=0.0.0.0 \
+ --port=8003 \
+ --admin_port=8103 \
+ --api_port=8203 \
+ --log_level=info \
+ --dev_appserver_log_level=info \
+ /gophr/backend/app-dev.yaml
